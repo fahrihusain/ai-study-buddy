@@ -1,0 +1,18 @@
+# Abaikan folder dependencies (ini yang bikin 4000+ file)
+node_modules/
+
+# Abaikan file environment (berisi API Key rahasia)
+.env
+
+# Abaikan folder build/dist hasil compile React
+build/
+dist/
+
+# Abaikan log error
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Abaikan file sistem operasi
+.DS_Store
+Thumbs.db
