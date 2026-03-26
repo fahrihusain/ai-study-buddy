@@ -72,7 +72,7 @@ const quizSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    completeAt: {
+    completedAt: {
       type: Date,
       dafault: null,
     },
