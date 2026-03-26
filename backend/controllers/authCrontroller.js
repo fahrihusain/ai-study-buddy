@@ -42,7 +42,7 @@ export const register = async (req, res, next) => {
           username: user.username,
           email: user.email,
           profileImage: user.profileImage,
-          createdAt: user.createdA,
+          createdAt: user.createdAt,
         },
         token,
       },
