@@ -12,11 +12,15 @@ export const chunkText = (text, chunkSize = 500, overlap = 50) => {
 
   //Clean text while preserving paragraph structure
 
-  const cleanedText = text.replace(/\r\n/g, "\n").replace(/\s+/g, "").replace(/\n/g, "/n").replace(/ \n/g, "/n").trim();
+  const cleanedText = text
+    .replace(/\r\n/g, "\n") // 1. Normalkan line break Windows
+    .replace(/[ \t]+/g, " ") // 2. Ubah TAB/Spasi ganda jadi SATU spasi saja
+    .replace(/\n\s*\n/g, "\n\n") // 3. Normalkan double newline untuk paragraf
+    .trim();
 
   //Try to split paragraph (single or doble newlines)
 
-  const paragraphs = cleanedText.split(/\n+/).filter((p) => p.trim().length > 0);
+  const paragraphs = cleanedText.split(/\n/).filter((p) => p.trim().length > 0);
 
   const chunks = [];
   let currentChunk = [];
@@ -32,12 +36,12 @@ export const chunkText = (text, chunkSize = 500, overlap = 50) => {
     if (paragraphWordCount > chunkSize) {
       if (currentChunk.length > 0) {
         chunks.push({
-          content: currentChunk.join("\n\n"),
+          content: currentChunk.join(" "),
           chunkIndex: chunkIndex++,
           pageNumber: 0,
         });
         currentChunk = [];
-        currentWordCount: 0;
+        currentWordCount = 0;
       }
 
       //split largeparagraph into word based chunks
@@ -114,7 +118,7 @@ export const chunkText = (text, chunkSize = 500, overlap = 50) => {
  * @return {Array<Object>}
  */
 
-export const findRelevatChunks = (chunks, query, maxChunks = 3) => {
+export const findRelevantChunks = (chunks, query, maxChunks = 3) => {
   if (!chunks || chunks.length === 0 || !query) {
     return [];
   }
@@ -125,7 +129,8 @@ export const findRelevatChunks = (chunks, query, maxChunks = 3) => {
   //Extract end clear query words
   const queryWords = query
     .toLowerCase()
-    .split("/\s+/")
+    .replace(/[^\w\s]/g, "")
+    .split(/\s+/)
     .filter((w) => w.length > 2 && !stopWords.has(w));
 
   if (queryWords.length === 0) {
@@ -141,6 +146,7 @@ export const findRelevatChunks = (chunks, query, maxChunks = 3) => {
   const scoredChunks = chunks.map((chunk, index) => {
     const content = chunk.content.toLowerCase();
     const contentWords = content.split(/\s+/);
+    const wordCount = contentWords.length;
     let score = 0;
 
     //Score each query word
@@ -162,8 +168,8 @@ export const findRelevatChunks = (chunks, query, maxChunks = 3) => {
     }
 
     //Normalize by content length
-    const normalizedScore = score / Math.sqrt(contentWords);
-
+    // const normalizedScore = score / Math.sqrt(contentWords);
+    const normalizedScore = score / Math.sqrt(wordCount || 1);
     //Small  bonus for earlier chunks
     const positionBonus = 1 - (index / chunks.length) * 0.1;
 

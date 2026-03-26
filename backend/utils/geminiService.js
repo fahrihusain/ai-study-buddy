@@ -177,7 +177,7 @@ export const generateSummary = async (text) => {
  */
 
 export const chatWithContext = async (question, chunks) => {
-  const context = chunks.map((c, i) => `[Chunk ${i + 1}]\n${c.context}`).join("\n\n");
+  const context = chunks.map((c, i) => `[Chunk ${i + 1}]\n${c.content}`).join("\n\n");
 
   console.log("context_____", context);
 
@@ -199,7 +199,7 @@ export const chatWithContext = async (question, chunks) => {
     return generatedText;
   } catch (error) {
     console.error("Gemini API error :", error);
-    throw new error("Failed to process chat request");
+    throw new Error("Failed to process chat request");
   }
 };
 
@@ -226,6 +226,6 @@ export const explainConcept = async (concept, context) => {
     return generatedText;
   } catch (error) {
     console.error("Gemini API error:", error);
-    throw new error("Failed to explain concept");
+    throw new Error("Failed to explain concept");
   }
 };
