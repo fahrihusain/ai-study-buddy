@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import LoginPage from "./pages/Auth/LoginPage";
 import RegisterPage from "./pages/Auth/RegisterPage";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import DashboardPage from "./pages/Dashbord/Dashbord";
+import DashboardPage from "./pages/Dashbord/Dashboard";
 import DocumentListPage from "./pages/Documents/DocumentListPage";
 import DocumentDetailPage from "./pages/Documents/DocumentDetailPage";
 import FlashcardListPage from "./pages/Flashcards/FlashcardListPage";
@@ -12,10 +12,10 @@ import QuizTakePage from "./pages/Quizzes/QuizTakePage";
 import QuizResultPage from "./pages/Quizzes/QuizResultPage";
 import ProfilePage from "./pages/Profile/ProfilePage";
 import NotFoundPage from "./pages/NotFoundPage";
+import { useAuth } from "./components/context/AuthContext";
 
 const App = () => {
-  const isAuthenticated = false; // Simulate authentication status
-  const loading = false; // Simulate loading state
+  const { isAuthenticated, loading } = useAuth();
 
   if (loading) {
     return <div className="flex items-center justify-center h-screen">Loading...</div>;
