@@ -11,7 +11,7 @@ export const getDashboard = async (req, res, next) => {
     const userId = req.user._id;
 
     //Get counts
-    const totatlDocuments = await Document.countDocuments({ userId });
+    const totalDocuments = await Document.countDocuments({ userId });
     const totalFlashcardSets = await Flashcard.countDocuments({ userId });
     const totalQuizzes = await Quiz.countDocuments({ userId });
     const completedQuizzes = await Quiz.countDocuments({ userId, completedAt: { $ne: null } });
@@ -44,7 +44,7 @@ export const getDashboard = async (req, res, next) => {
       success: true,
       data: {
         overview: {
-          totatlDocuments,
+          totalDocuments,
           totalFlashcardSets,
           totalFlashcards,
           reviewedFlashcards,
