@@ -1,6 +1,5 @@
 import axiosInstance from "../utils/axiosInstance";
 import { API_PATHS } from "../utils/apiPaths";
-import { Trophy } from "lucide-react";
 
 const login = async (email, password) => {
   try {
