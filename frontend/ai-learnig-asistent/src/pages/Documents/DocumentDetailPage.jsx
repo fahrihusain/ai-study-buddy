@@ -28,19 +28,24 @@ const DocumentDetailPage = () => {
     fetchDocumentDetail();
   }, []);
 
-  //helper functio to get the full pdf url
   const getPdfUrl = () => {
-    if (!document?.data.filePath) return null;
+    // Gunakan optional chaining untuk keamanan
+    if (!document?.data?.filePath) return null;
 
     const filePath = document.data.filePath;
-    if (filePath.startsWith("http://") || filePath.starstsWith("https://")) {
+
+    // Perbaikan typo: startsWith
+    if (filePath.startsWith("http://") || filePath.startsWith("https://")) {
       return filePath;
     }
 
     const baseUrl = process.env.REACT_APP_API_URL || "http://localhost:8000";
-    return `${baseUrl}${filePath.starstWith("/") ? "" : "/"}${filePath}`;
-  };
 
+    // Perbaikan typo: startsWith
+    const separator = filePath.startsWith("/") ? "" : "/";
+
+    return `${baseUrl}${separator}${filePath}`;
+  };
   const renderContent = () => {
     if (loading) {
       return <Spinner />;
@@ -108,8 +113,19 @@ const DocumentDetailPage = () => {
   if (!document) {
     return <div className="text-center p-8">Document not found.</div>;
   }
-  //lanjut disini ....
-  return <div>DocumentDetailPage</div>;
+
+  return (
+    <div>
+      <div className="mb-4">
+        <Link to="/documents" className="inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 transition-colors ">
+          <ArrowLeft size={16} />
+          Back to documents
+        </Link>
+      </div>
+      <PageHeader title={document.data.title} />
+      <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
+    </div>
+  );
 };
 
 export default DocumentDetailPage;

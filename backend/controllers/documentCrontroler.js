@@ -35,7 +35,7 @@ export const uploadDocument = async (req, res, next) => {
 
     //Construct the URL for the uplouded file
     const baseURL = `http://localhost:${process.env.PORT || 8000}`;
-    const fileURL = `${baseURL}/uplouds/documents/${req.file.filename}`;
+    const fileURL = `${baseURL}/uploads/documents/${req.file.filename}`;
     //Create document record
     const document = await Document.create({
       userId: req.user._id,
@@ -54,7 +54,7 @@ export const uploadDocument = async (req, res, next) => {
     res.status(201).json({
       success: true,
       data: document,
-      message: "Document uplouded succesfully, Processing in progres...",
+      message: "Document uploaded succesfully, Processing in progres...",
     });
   } catch (error) {
     //Clean up uploaded file if there's an error
@@ -131,7 +131,7 @@ export const getDocuments = async (req, res, next) => {
         },
       },
       {
-        $sort: { uploudDate: -1 },
+        $sort: { createdAt: -1 },
       },
     ]);
 
@@ -196,7 +196,7 @@ export const deleteDocument = async (req, res, next) => {
     });
 
     if (!document) {
-      return res.statu(404).json({
+      return res.status(404).json({
         success: false,
         error: "Document not found",
         statusCode: 404,

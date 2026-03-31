@@ -115,7 +115,7 @@ const DocumentListPage = () => {
             <p className="text-sm text-slate-500 mb-6">Get started by uploading your first pdf document to begin learning</p>
             <button
               onClick={() => setIsUploadModalOpen(true)}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white text-sm font-semibold rounded-xl transition-all duration-200 shadow-lg shadow-emerald-500/25 hover:shadow-xl hover:shadow-emerald-500/30 active:scale-[0.98]"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white text-sm font-semibold rounded-xl transition-all duration-200 shadow-lg shadow-emerald-500/25 hover:shadow-xl hover:shadow-emerald-500/30 active:scale-[0.98] cursor-pointer"
             >
               <Plus className="w-4 h-4 " strokeWidth={2.5} />
               Upload Document
@@ -148,7 +148,7 @@ const DocumentListPage = () => {
           </div>
           {documents.length > 0 && (
             <Button onClick={() => setIsUploadModalOpen(true)}>
-              <Plus className="w-4 h-4" strokeWidth={2.5} />
+              <Plus className="w-4 h-4 cursor-pointer" strokeWidth={2.5} />
               Upload Document
             </Button>
           )}
@@ -212,7 +212,7 @@ const DocumentListPage = () => {
               {/* Action Button */}
               <div className="flex gap-3 pt-2">
                 <button
-                  className="flex-1 h-11 px-4 border-2 border-slate-200 rounded-xl bg-white text-slate-700 font-semibold hover:bg-slate-50 hover:border-slate-300 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 h-11 px-4 border-2 border-slate-200 rounded-xl bg-white text-slate-700 font-semibold hover:bg-slate-50 hover:border-slate-300 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                   type="button"
                   onClick={() => setIsUploadModalOpen(false)}
                   disabled={uploading}
@@ -244,7 +244,7 @@ const DocumentListPage = () => {
           <div className="relative w-full max-w-md bg-white/95 backdrop-blur-xl border border-slate-200/60 rounded-2xl shadow-slate-900/20 p-8">
             {/* Close button */}
             <button className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-all duration-200 " onClick={() => setIsDeleteModalOpen(false)}>
-              <X className="w-5 h-5" strokeWidth={2} />
+              <X className="w-5 h-5 cursor-pointer" strokeWidth={2} />
             </button>
 
             {/* Modal Header */}
@@ -264,7 +264,7 @@ const DocumentListPage = () => {
             {/* Action button */}
             <div className="flex gap-3">
               <button
-                className="flex-1 h-11 px-4 border-2 border-slate-200 rounded-xl bg-white text-slate-700 text-sm font-semibold hover:bg-slate-50 hover:border-slate-300 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed "
+                className="flex-1 h-11 px-4 border-2 border-slate-200 rounded-xl bg-white text-slate-700 text-sm font-semibold hover:bg-slate-50 hover:border-slate-300 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer "
                 type="button"
                 onClick={() => setIsDeleteModalOpen(false)}
                 disabled={deleting}
@@ -272,7 +272,7 @@ const DocumentListPage = () => {
                 Cancel
               </button>
               <button
-                className="flex-1 h-11 px-4 bg-linear-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-sm font-semibold rounded-xl transition-all duration-200 shadow-lg shadow-red-500/25 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]"
+                className="flex-1 h-11 px-4 bg-linear-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-sm font-semibold rounded-xl transition-all duration-200 shadow-lg shadow-red-500/25 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98] cursor-pointer"
                 type="button"
                 onClick={handleConfirDelete}
                 disabled={deleting}
