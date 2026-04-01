@@ -40,7 +40,7 @@ const chat = async (documentId, message) => {
   }
 };
 
-const explaiConcept = async (documentId, concept) => {
+const explainConcept = async (documentId, concept) => {
   try {
     const response = await axiosInstance.post(API_PATHS.AI.EXPLAIN_CONCEPT, { documentId, concept });
     return response.data.data;
@@ -51,7 +51,7 @@ const explaiConcept = async (documentId, concept) => {
 
 const getChatHistory = async (documentId) => {
   try {
-    const response = await axiosInstance.get(API_PATHS.AI.GET_CHAT_HISTORY, { documentId });
+    const response = await axiosInstance.get(API_PATHS.AI.GET_CHAT_HISTORY(documentId));
     return response.data;
   } catch (error) {
     throw error.response?.data || { message: "Failed to fetch chat history" };
@@ -63,7 +63,7 @@ const aiService = {
   generateQuiz,
   generateSummary,
   chat,
-  explaiConcept,
+  explainConcept,
   getChatHistory,
 };
 
