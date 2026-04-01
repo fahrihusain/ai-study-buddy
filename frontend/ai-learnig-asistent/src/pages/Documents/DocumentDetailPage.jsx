@@ -13,7 +13,7 @@ const DocumentDetailPage = () => {
   const { id } = useParams();
   const [document, setDocument] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("content");
+  const [activeTab, setActiveTab] = useState("Content");
 
   useEffect(() => {
     const fetchDocumentDetail = async () => {
@@ -103,7 +103,7 @@ const DocumentDetailPage = () => {
   const tabs = [
     { name: "Content", label: "Content", content: renderContent() },
     { name: "Chat", label: "Chat", content: renderChat() },
-    { name: "AI actions", label: "AI actions", content: renderAIActions() },
+    { name: "AI Actions", label: "AI Actions", content: renderAIActions() },
     { name: "Flashcards", label: "Flashcards", content: renderFlashcardsTab() },
     { name: "Quizzes", label: "Quizzes", content: renderQuizzesTab() },
   ];
