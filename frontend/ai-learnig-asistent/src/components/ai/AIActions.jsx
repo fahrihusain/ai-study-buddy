@@ -4,6 +4,7 @@ import { Sparkles, BookOpen, Lightbulb } from "lucide-react";
 import aiService from "../../services/aiService";
 import toast from "react-hot-toast";
 import MarkdownRenderer from "../common/MarkdownRenderer";
+import Modal from "../common/Modal ";
 
 const AIActions = () => {
   const { id: documentId } = useParams();
@@ -132,6 +133,13 @@ const AIActions = () => {
           </div>
         </div>
       </div>
+
+      {/* Result Modal */}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={modalTitle}>
+        <div className="max-h-[60vh] overflow-y-auto prose prose-sm max-w-none prose-slate">
+          <MarkdownRenderer content={modalContent} />
+        </div>
+      </Modal>
     </>
   );
 };
