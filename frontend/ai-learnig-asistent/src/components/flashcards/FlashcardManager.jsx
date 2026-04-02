@@ -85,7 +85,21 @@ const FlashcardManager = ({ documentId }) => {
     setIsDeleteModalOpen(true);
   };
 
-  const handleConfirmDelete = async () => {};
+  const handleConfirmDelete = async () => {
+    if (!setToDelete) return;
+    setDeleting(true);
+    try {
+      await flashcardService.deleteFlashcardSet(setToDelete._id);
+      toast.success("Flashcard set deleted successfully");
+      setIsDeleteModalOpen(false);
+      setSetToDelete(null);
+      fetchFlashcardSets();
+    } catch (error) {
+      toast.error(error.message || "Failed to delete flashcard set.");
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   const handleSelectSet = (set) => {
     setSelectedSet(set);
@@ -99,37 +113,145 @@ const FlashcardManager = ({ documentId }) => {
   const renderSetList = () => {
     if (loading) {
       return (
-        <div className="">
+        <div className="flex items-center justify-center py-20">
           <Spinner />
         </div>
       );
     }
 
-    return (
-      <div className="">
-        <div className="">
-          <Brain className="" strokeWidth={2} />
+    if (flashcardSets === 0) {
+      return (
+        <div className="flex flex-col items-center justify-center py-16 px-6">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-br from-emerald-100 to-teal-100 mb-6">
+            <Brain className="w-8 h-8 text-emerald-600" strokeWidth={2} />
+          </div>
+          <h3 className="text-xl font-semibold text-slate-900 mb-2">No Flashcard yet</h3>
+          <p className="text-sm text-slate-500 mb-8 text-center max-w-sm">Generate flashcard from your document to start learning and reinforce your knowledge.</p>
+          <button
+            className="group inline-flex items-center gap-2 px-6 h-12 bg-linear-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold text-sm rounded-xl transition-all duration-200 shadow-lg shadow-emerald-500/25 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
+            onClick={handleGenerateFlashcards}
+            disabled={generating}
+          >
+            {generating ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                Generating...
+              </>
+            ) : (
+              <>
+                <Sparkles className="w-4 h-4" strokeWidth={2} />
+                Generate Flashcards
+              </>
+            )}
+          </button>
         </div>
-        <h3 className="">No Flashcard yet</h3>
-        <p className="">Generate flashcard from your document to start learning and reinforce your knowledge.</p>
-        <button className="" onClick={handleGenerateFlashcards} disabled={generating}>
-          {generating ? (
-            <>
-              <div className="" />
-              Generating...
-            </>
-          ) : (
-            <>
-              <Sparkles className="" strokeWidth={2} />
-              Generate Flashcards
-            </>
-          )}
-        </button>
+      );
+    }
+
+    return (
+      <div className="space-y-6">
+        {/* Header with generate button*/}
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-semibold text-slate-900">Your flashcard sets</h3>
+            <p className="text-sm text-slate-500 mt-1">
+              {flashcardSets.length} {flashcardSets.length === 1 ? "set" : "sets"} available
+            </p>
+          </div>
+          <button
+            onClick={handleGenerateFlashcards}
+            disabled={generating}
+            className="group inline-flex items-center gap-2 px-5 h-11 bg-linear-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold text-sm rounded-xl transition-all duration-200 shadow-lg shadow-emerald-500/25 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
+          >
+            {generating ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                Generating..
+              </>
+            ) : (
+              <>
+                <Plus className="w-4 h-4" strokeWidth={2} />
+                Generate New set
+              </>
+            )}
+          </button>
+        </div>
+
+        {/* Flashcard Sets grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {flashcardSets.map((set) => (
+            <div
+              key={set._id}
+              onClick={() => handleSelectSet(set)}
+              className="group relative bg-white/80 backdrop-blur-xl border-2 border-slate-200 hover:border-emerald-300 rounded-2xl p-6 cursor-pointer transition-all duration-200 hover:shadow-lg hover:shadow-emerald-500/10"
+            >
+              {/* Delete Button */}
+              <button className="absolute top-4 right-4 p-2 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-lg transition-all duration-200 opacity-0 group-hover:opacity-100" onClick={(e) => handleDeleteRequest(e, set)}>
+                <Trash2 className="w-4 h-4" strokeWidth={2} />
+              </button>
+
+              {/* Set content */}
+              <div className="space-y-4">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-linear-to-br from-emerald-100 to-teal-100">
+                  <Brain className="w-6 h-6 text-emerald-600" strokeWidth={2} />
+                </div>
+
+                <div>
+                  <h4 className="text-base font-semibold text-slate-900 mb-1">Flashcard Set</h4>
+                  <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">Created {moment(set.createdAt).format("MMM D, YYYY")}</p>
+                </div>
+
+                <div className="flex items-center gap-2 pt-2 border-t border-slate-100 ">
+                  <div className="px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-lg">
+                    <span className="text-sm font-semibold text-emerald-700">
+                      {set.cards.length} {set.cards.length === 1 ? "card" : "cards"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   };
 
-  return <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl shadow-xl shadow-slate-200/50 p-8">{selectedSet ? handleFlashcardViewer() : renderSetList()}</div>;
+  return (
+    <>
+      <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl shadow-xl shadow-slate-200/50 p-8">{selectedSet ? handleFlashcardViewer() : renderSetList()}</div>
+
+      {/* Delete confirmation modal */}
+      <Modal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} title="Delete flashcard set?">
+        <div className="space-y-6">
+          <p className="text-sm text-slate-600 ">Are you sure to delete this flashcard set? This action cannot be undone all card will be permanently removed.</p>
+          <div className="flex items-center justify-end gap-3 pt-2">
+            <button
+              type="button"
+              onClick={() => setIsDeleteModalOpen(false)}
+              disabled={deleting}
+              className="px-5 h-11 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-sm rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleConfirmDelete}
+              disabled={deleting}
+              className="px-5 h-11 bg-linear-to-r from-rose-500 to-red-500 hover:from-rose-600 hover:to-red-600 text-white font-semibold text-sm rounded-xl transition-all duration-200 shadow-lg shadow-rose-500/25 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
+            >
+              {deleting ? (
+                <span className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  Deleting...
+                </span>
+              ) : (
+                "Delete set"
+              )}
+            </button>
+          </div>
+        </div>
+      </Modal>
+    </>
+  );
 };
 
 export default FlashcardManager;
