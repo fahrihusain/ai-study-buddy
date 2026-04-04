@@ -11,7 +11,7 @@ export const getFlashcards = async (req, res, next) => {
       documentId: req.params.documentId,
     })
       .populate("documentId", "title fileName")
-      .sort({ createAt: -1 });
+      .sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,
@@ -29,7 +29,7 @@ export const getFlashcards = async (req, res, next) => {
 
 export const getAllFlashcardSets = async (req, res, next) => {
   try {
-    const flashcardSets = await Flashcard.find({ userId: req.user._id }).populate("documentId", "title").sort({ createAt: -1 });
+    const flashcardSets = await Flashcard.find({ userId: req.user._id }).populate("documentId", "title").sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,
