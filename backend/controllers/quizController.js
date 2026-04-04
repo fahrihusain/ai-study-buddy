@@ -11,7 +11,7 @@ export const getQuizzes = async (req, res, next) => {
       documentId: req.params.documentId,
     })
       .populate("documentId", "title fileName")
-      .sort({ createAt: -1 });
+      .sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,
@@ -37,7 +37,7 @@ export const getQuizById = async (req, res, next) => {
     if (!quiz) {
       return res.status(404).json({
         success: false,
-        error: "Error not found",
+        error: "Quiz not found",
         statuscode: 404,
       });
     }
@@ -80,7 +80,7 @@ export const submitQuiz = async (req, res, next) => {
       });
     }
 
-    if (quiz.completeAt) {
+    if (quiz.completedAt) {
       return res.status(400).json({
         success: false,
         error: "Quiz already completed",
@@ -116,7 +116,7 @@ export const submitQuiz = async (req, res, next) => {
     //Upadate quiz
     quiz.userAnswers = userAnswers;
     quiz.score = score;
-    quiz.completeAt = new Date();
+    quiz.completedAt = new Date();
 
     await quiz.save();
 
@@ -156,6 +156,14 @@ export const getQuizResults = async (req, res, next) => {
       });
     }
 
+    if (!quiz.completedAt) {
+      return res.status(400).json({
+        success: false,
+        error: "Quiz not completed yet",
+        statuscode: 400,
+      });
+    }
+
     //Build detailed results
     const detailedResults = quiz.questions.map((question, index) => {
       const userAnswer = quiz.userAnswers.find((a) => a.questionIndex === index);
@@ -167,19 +175,21 @@ export const getQuizResults = async (req, res, next) => {
         correctAnswer: question.correctAnswer,
         selectedAnswer: userAnswer?.selectedAnswer || null,
         isCorrect: userAnswer?.isCorrect || false,
-        explanation: quiz.explanation,
+        explanation: question.explanation,
       };
     });
 
     res.status(200).json({
       success: true,
       data: {
-        id: quiz._id,
-        title: quiz.title,
-        document: quiz.documentId,
-        score: quiz.score,
-        totalQuestions: quiz.totalQuestions,
-        completeAt: quiz.completeAt,
+        quiz: {
+          id: quiz._id,
+          title: quiz.title,
+          document: quiz.documentId,
+          score: quiz.score,
+          totalQuestions: quiz.totalQuestions,
+          completedAt: quiz.completedAt,
+        },
       },
       results: detailedResults,
     });
