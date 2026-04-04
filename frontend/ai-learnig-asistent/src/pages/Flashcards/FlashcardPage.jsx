@@ -132,15 +132,15 @@ const FlashcardPage = () => {
 
   return (
     <div>
-      <div className="">
-        <Link to={`/documents/${documentId}`} className="">
+      <div className="mb-4">
+        <Link to={`/documents/${documentId}`} className="inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 transition-colors ">
           <ArrowLeft size={16} />
           Back to document
         </Link>
       </div>
 
       <PageHeader title="Flashcards">
-        <div className="">
+        <div className="flex gap-2">
           {!loading &&
             (flashcards.length > 0 ? (
               <>
@@ -165,13 +165,13 @@ const FlashcardPage = () => {
       {renderFlashcardContent()}
 
       <Modal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} title="Confirm Delete Flashcard Set">
-        <div className="">
-          <p className="">Are you sure you want to delete all flashcards for this document? this action cannot be undone</p>
-          <div className="">
+        <div className="space-x-4">
+          <p className="text-sm text-neutral-600 ">Are you sure you want to delete all flashcards for this document? this action cannot be undone</p>
+          <div className="flex justify-end gap-2 pt-2">
             <Button type="button" variant="secondary" onClick={() => setIsDeleteModalOpen(false)} disabled={deleting}>
               Cancel
             </Button>
-            <Button type="button" variant="secondary" onClick={handleDeleteFlashcardSet} disabled={deleting} className="">
+            <Button type="button" variant="secondary" onClick={handleDeleteFlashcardSet} disabled={deleting} className="bg-red-500 hover:bg-red-600 active:bg-red-700 focus:ring-red-500">
               {deleting ? "Deleting..." : "Delete"}
             </Button>
           </div>
