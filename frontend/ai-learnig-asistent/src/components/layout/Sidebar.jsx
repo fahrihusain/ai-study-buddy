@@ -49,7 +49,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
             <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-linear-to-br from-emerald-400 to-teal-500 shadow-md shadow-emerald-500/20">
               <BrainCircuit className="text-white" size={20} strokeWidth={2.5} />
             </div>
-            <h1 className="text-sm md:text-base font-bold text-slate-900 tracking-tight">AI Learning Asistent</h1>
+            <h1 className="text-sm md:text-base font-bold text-slate-900 tracking-tight">AI Study Buddy</h1>
           </div>
           <button onClick={toggleSidebar} className="md:hidden text-slate-500 hover:text-slate-800">
             <X size={24} />
