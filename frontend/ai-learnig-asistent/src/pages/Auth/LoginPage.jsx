@@ -2,18 +2,23 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../components/context/AuthContext";
 import authService from "../../services/authService";
-import { BrainCircuit, Mail, Lock, ArrowRight } from "lucide-react";
+import { BrainCircuit, Mail, Lock, ArrowRight, Eye, EyeOff } from "lucide-react";
 import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
 
   const navigate = useNavigate();
   const { login } = useAuth();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -77,10 +82,13 @@ const LoginPage = () => {
                 <div className={`absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors duration-200 ${focusedField === "password" ? "text-emerald-500" : "text-slate-400"}`}>
                   <Lock className="h-5 w-5" strokeWidth={2} />
                 </div>
+                <button type="button" className="absolute right-3 top-3 text-slate-500" onClick={togglePasswordVisibility}>
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
                 <input
                   autoComplete=""
                   name="password"
-                  type="password"
+                  type={showPassword ? "password" : "text"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   onFocus={() => setFocusedField("password")}

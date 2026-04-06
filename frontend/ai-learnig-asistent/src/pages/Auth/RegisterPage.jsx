@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/authService";
-import { BrainCircuit, Mail, Lock, ArrowRight, User } from "lucide-react";
+import { BrainCircuit, Mail, Lock, ArrowRight, User, Eye, EyeOff } from "lucide-react";
 import toast from "react-hot-toast";
 
 const RegisterPage = () => {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
 
   const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -97,8 +102,11 @@ const RegisterPage = () => {
                 <div className={`absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors duration-200 ${focusedField === "password" ? "text-emerald-500" : "text-slate-400"} `}>
                   <Lock className="h-5 w-5" strokeWidth={2} />
                 </div>
+                <button type="button" onClick={togglePasswordVisibility} className="absolute text-slate-500 right-3 top-3">
+                  {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+                </button>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   onFocus={() => setFocusedField("password")}
