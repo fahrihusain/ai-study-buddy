@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Plus, ChevronLeft, ChevronRight, Trash2, ArrowLeft, Sparkles, Brain, TrafficCone } from "lucide-react";
-import toas, { toast } from "react-hot-toast";
+import toast from "react-hot-toast";
 import moment from "moment";
 
 import flashcardService from "../../services/flashCardService";
