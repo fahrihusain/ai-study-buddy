@@ -54,13 +54,17 @@ const QuizTakePage = () => {
   const handleSubmitQuiz = async () => {
     setSubmiting(true);
     try {
-      const formartedAnswers = Object.keys(selectedAnswers).map((questionId) => {
-        const question = quiz.questions.find((q) => q._id === questionId);
-        const questionIndex = quiz.questions.findIndex((q) => q._id === questionId);
-        const optionIndex = selectedAnswers[questionId];
-        const selectedAnswer = question.options[optionIndex];
-        return { questionIndex, selectedAnswer };
-      });
+      const formartedAnswers = Object.keys(selectedAnswers).map(
+        (questionId) => {
+          const question = quiz.questions.find((q) => q._id === questionId);
+          const questionIndex = quiz.questions.findIndex(
+            (q) => q._id === questionId,
+          );
+          const optionIndex = selectedAnswers[questionId];
+          const selectedAnswer = question.options[optionIndex];
+          return { questionIndex, selectedAnswer };
+        },
+      );
 
       await quizService.submitQuiz(quizId, formartedAnswers);
       toast.success("Quiz submitted successfully!");
@@ -84,7 +88,9 @@ const QuizTakePage = () => {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
-          <p className="text-slate-600 text-lg">Quiz not found or has no questions.</p>
+          <p className="text-slate-600 text-lg">
+            Quiz not found or has no questions.
+          </p>
         </div>
       </div>
     );
@@ -104,10 +110,17 @@ const QuizTakePage = () => {
           <span className="text-sm font-semibold text-slate-700">
             Question {currentQuestionIndex + 1} of {quiz.questions.length}
           </span>
-          <span className="text-sm font-semibold text-slate-500">{answeredCount} answered</span>
+          <span className="text-sm font-semibold text-slate-500">
+            {answeredCount} answered
+          </span>
         </div>
         <div className="relative h-2 bg-slate-100 rounded-full overflow-hidden">
-          <div className="absolute inset-y-0 left-0 bg-linear-to-r from-emerald-500 to-teal-500 rounded-full transition-all duration-500 ease-out" style={{ width: `${((currentQuestionIndex + 1) / quiz.questions.length) * 100}%` }} />
+          <div
+            className="absolute inset-y-0 left-0 bg-linear-to-r from-emerald-500 to-teal-500 rounded-full transition-all duration-500 ease-out"
+            style={{
+              width: `${((currentQuestionIndex + 1) / quiz.questions.length) * 100}%`,
+            }}
+          />
         </div>
       </div>
 
@@ -115,10 +128,14 @@ const QuizTakePage = () => {
       <div className="bg-white/80 backdrop-blur-xl border-2 border-slate-200 rounded-2xl shadow-xl shadow-slate-200/50 p-6 mb-8">
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-emerald-50 to-teal-50 border border-emerald-200 rounded-xl mb-6">
           <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-          <span className="text-sm font-semibold text-emerald-700 ">Question {currentQuestionIndex + 1}</span>
+          <span className="text-sm font-semibold text-emerald-700 ">
+            Question {currentQuestionIndex + 1}
+          </span>
         </div>
 
-        <h3 className="text-lg font-semibold text-slate-900 mb-6 leading-relaxed">{currentQuestion.question}</h3>
+        <h3 className="text-lg font-semibold text-slate-900 mb-6 leading-relaxed">
+          {currentQuestion.question}
+        </h3>
 
         {/* options */}
         <div className="space-y-3">
@@ -129,10 +146,21 @@ const QuizTakePage = () => {
                 key={index}
                 className={`group relative flex items-center p-3 border-2 rounded-xl cursor-pointer transition-all duration-200 ${isSelected ? "border-emerald-500 bg-emerald-50 shadow-lg shadow-emerald-500/10" : "border-slate-200 bg-slate-50/50 hover:border-slate-300 hover:bg-white hover:shadow-md"}`}
               >
-                <input type="radio" name={`question-${currentQuestion._id}`} value={index} checked={isSelected} onChange={() => handleOptionChange(currentQuestion._id, index)} className="sr-only" />
+                <input
+                  type="radio"
+                  name={`question-${currentQuestion._id}`}
+                  value={index}
+                  checked={isSelected}
+                  onChange={() =>
+                    handleOptionChange(currentQuestion._id, index)
+                  }
+                  className="sr-only"
+                />
 
                 {/* Custom radio button */}
-                <div className={`shrink-0 w-5 h-5 rounded-full border-2 transition-all duration-200 ${isSelected ? "border-emerald-500 bg-emerald-500" : "border-slate-300 bg-white group-hover:border-emerald-400"}`}>
+                <div
+                  className={`shrink-0 w-5 h-5 rounded-full border-2 transition-all duration-200 ${isSelected ? "border-emerald-500 bg-emerald-500" : "border-slate-300 bg-white group-hover:border-emerald-400"}`}
+                >
                   {isSelected && (
                     <div className="w-full h-full flex items-center justify-center">
                       <div className="w-2 h-2 bg-white rounded-full" />
@@ -141,10 +169,19 @@ const QuizTakePage = () => {
                 </div>
 
                 {/* Option Text */}
-                <span className={`ml-4 text-sm font-medium transition-colors duration-200 ${isSelected ? "text-emerald-900" : "text-slate-700 group-hover:text-slate-900"}`}>{option}</span>
+                <span
+                  className={`ml-4 text-sm font-medium transition-colors duration-200 ${isSelected ? "text-emerald-900" : "text-slate-700 group-hover:text-slate-900"}`}
+                >
+                  {option}
+                </span>
 
                 {/* Selected Checkmark */}
-                {isSelected && <CheckCircle2 className="ml-auto w-5 h-5 text-emerald-500" strokeWidth={2.5} />}
+                {isSelected && (
+                  <CheckCircle2
+                    className="ml-auto w-5 h-5 text-emerald-500"
+                    strokeWidth={2.5}
+                  />
+                )}
               </label>
             );
           })}
@@ -153,8 +190,15 @@ const QuizTakePage = () => {
 
       {/* Navigation Buttons */}
       <div className="flex items-center justify-between gap-4">
-        <Button onClick={handlePreviousQuestion} disabled={currentQuestionIndex === 0 || submiting} variant="secondary">
-          <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform duration-200" strokeWidth={2.5} />
+        <Button
+          onClick={handlePreviousQuestion}
+          disabled={currentQuestionIndex === 0 || submiting}
+          variant="secondary"
+        >
+          <ChevronLeft
+            className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform duration-200"
+            strokeWidth={2.5}
+          />
           Previous
         </Button>
 
@@ -182,7 +226,10 @@ const QuizTakePage = () => {
         ) : (
           <Button onClick={handleNextQuestion} disabled={submiting}>
             Next
-            <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" strokeWidth={2.5} />
+            <ChevronRight
+              className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200"
+              strokeWidth={2.5}
+            />
           </Button>
         )}
       </div>
@@ -190,7 +237,9 @@ const QuizTakePage = () => {
       {/* Question navigation dots */}
       <div className="mt-0 flex items-center justify-center gap-2 flex-wrap">
         {quiz.questions.map((_, index) => {
-          const isAnsweredQuestion = selectedAnswers.hasOwnProperty(quiz.questions[index]._id);
+          const isAnsweredQuestion = selectedAnswers.hasOwnProperty(
+            quiz.questions[index]._id,
+          );
           const isCurrent = index === currentQuestionIndex;
 
           return (

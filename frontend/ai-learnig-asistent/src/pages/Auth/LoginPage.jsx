@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../components/context/AuthContext";
 import authService from "../../services/authService";
-import { BrainCircuit, Mail, Lock, ArrowRight, Eye, EyeOff } from "lucide-react";
+import {
+  BrainCircuit,
+  Mail,
+  Lock,
+  ArrowRight,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 import toast from "react-hot-toast";
 
 const LoginPage = () => {
@@ -30,7 +37,9 @@ const LoginPage = () => {
       toast.success("Logged is successfully");
       navigate("/dashboard");
     } catch (err) {
-      setError(err.message || "Failed to login. Please check your credentials.");
+      setError(
+        err.message || "Failed to login. Please check your credentials.",
+      );
       toast.error(err.message || "Failed to login");
     } finally {
       setLoading(false);
@@ -47,17 +56,25 @@ const LoginPage = () => {
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-linear-to-br from-emerald-400 to-teal-500 shadow-lg shadow-emerald-500/25 mb-6  ">
               <BrainCircuit className="w-7 h-7 text-white" strokeWidth={2} />
             </div>
-            <h1 className="text-2xl font-medium text-slate-900 tracking-tight mb-2 ">Welcome back</h1>
-            <p className="text-slate-500 text-sm">Sign in to continue your journey</p>
+            <h1 className="text-2xl font-medium text-slate-900 tracking-tight mb-2 ">
+              Welcome back
+            </h1>
+            <p className="text-slate-500 text-sm">
+              Sign in to continue your journey
+            </p>
           </div>
 
           {/* From */}
           <form className="space-y-5" onSubmit={handleSubmit}>
             {/* Email field */}
             <div className="space-y-2">
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide ">Email</label>
+              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide ">
+                Email
+              </label>
               <div className="relative group">
-                <div className={`absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors duration-200 ${focusedField === "email" ? "text-emerald-500" : "text-slate-400"}`}>
+                <div
+                  className={`absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors duration-200 ${focusedField === "email" ? "text-emerald-500" : "text-slate-400"}`}
+                >
                   <Mail className="h-5 w-5" strokeWidth={2} />
                 </div>
                 <input
@@ -77,12 +94,20 @@ const LoginPage = () => {
 
             {/* Password field */}
             <div className="space-y-2">
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide">password</label>
+              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide">
+                password
+              </label>
               <div className="relative gruop">
-                <div className={`absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors duration-200 ${focusedField === "password" ? "text-emerald-500" : "text-slate-400"}`}>
+                <div
+                  className={`absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors duration-200 ${focusedField === "password" ? "text-emerald-500" : "text-slate-400"}`}
+                >
                   <Lock className="h-5 w-5" strokeWidth={2} />
                 </div>
-                <button type="button" className="absolute right-3 top-3 text-slate-500" onClick={togglePasswordVisibility}>
+                <button
+                  type="button"
+                  className="absolute right-3 top-3 text-slate-500"
+                  onClick={togglePasswordVisibility}
+                >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
                 <input
@@ -103,7 +128,9 @@ const LoginPage = () => {
             {/* error message */}
             {error && (
               <div className="rounded-lg bg-red-50 border border-red-200 p-3">
-                <p className="text-xs text-red-600 font-medium text-center">{error}</p>
+                <p className="text-xs text-red-600 font-medium text-center">
+                  {error}
+                </p>
               </div>
             )}
 
@@ -122,7 +149,10 @@ const LoginPage = () => {
                 ) : (
                   <>
                     Signing in
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" strokeWidth={2.5} />
+                    <ArrowRight
+                      className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
+                      strokeWidth={2.5}
+                    />
                   </>
                 )}
               </span>
@@ -134,7 +164,10 @@ const LoginPage = () => {
           <div className="mt-8 pt-6 border-t border-slate-200/60">
             <p className="text-center text-sm text-slate-600 ">
               Don't have account?{" "}
-              <Link to="/register" className="font-semibold text-emerald-600 hover:text-emerald-700 transition-colors duration-200">
+              <Link
+                to="/register"
+                className="font-semibold text-emerald-600 hover:text-emerald-700 transition-colors duration-200"
+              >
                 Sign up
               </Link>
             </p>
@@ -142,7 +175,9 @@ const LoginPage = () => {
         </div>
 
         {/* Subtle footer text */}
-        <p className="text-center text-xs text-slate-400 mt-6 ">By continuing, you agree to our Terms & Privacy Policy</p>
+        <p className="text-center text-xs text-slate-400 mt-6 ">
+          By continuing, you agree to our Terms & Privacy Policy
+        </p>
       </div>
     </div>
   );

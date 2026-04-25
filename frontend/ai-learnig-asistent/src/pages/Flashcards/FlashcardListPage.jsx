@@ -33,7 +33,12 @@ const FlashcardListPage = () => {
     }
 
     if (flashcardSets.length === 0) {
-      return <EmptyStae title="No Flashcard Set Found" description="You haven't generated any flashcards yet. Go to a document create your first set." />;
+      return (
+        <EmptyStae
+          title="No Flashcard Set Found"
+          description="You haven't generated any flashcards yet. Go to a document create your first set."
+        />
+      );
     }
 
     return (

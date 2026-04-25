@@ -1,6 +1,11 @@
 import express from "express";
 
-import { uploadDocument, getDocuments, getDocument, deleteDocument } from "../controllers/documentCrontroler.js";
+import {
+  uploadDocument,
+  getDocuments,
+  getDocument,
+  deleteDocument,
+} from "../controllers/documentCrontroler.js";
 
 import { protect } from "../middleware/auth.js";
 

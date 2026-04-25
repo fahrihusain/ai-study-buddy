@@ -43,12 +43,18 @@ const DocumentCard = ({ document, onDelete }) => {
           <div className="shrink-0 w-12 h-12 bg-linear-to-br from-emerald-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/25 group-hover:scale-110 transition-transform duration-300">
             <FileText className="w-6 h-6 text-white" strokeWidth={2} />
           </div>
-          <button onClick={handleDelete} className="opacity-0 group-hover:opacity-100 w-8 h-8 flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all duration-200 cursor-pointer">
+          <button
+            onClick={handleDelete}
+            className="opacity-0 group-hover:opacity-100 w-8 h-8 flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all duration-200 cursor-pointer"
+          >
             <Trash2 className="w-4 h-4 " strokeWidth={2} />
           </button>
         </div>
         {/* title */}
-        <h3 className="text-base font-semibold text-slate-900 truncate mb-2 " title={document.title}>
+        <h3
+          className="text-base font-semibold text-slate-900 truncate mb-2 "
+          title={document.title}
+        >
           {document.title}
         </h3>
 
@@ -66,16 +72,26 @@ const DocumentCard = ({ document, onDelete }) => {
           {/* Flashcards Section */}
           {document.flashcardCount !== undefined && (
             <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-purple-50 rounded-lg shrink-0">
-              <BookOpen className="w-3.5 h-3.5 text-purple-600" strokeWidth={2} />
-              <span className="text-xs font-semibold text-purple-700">{document.flashcardCount} Flashcards</span>
+              <BookOpen
+                className="w-3.5 h-3.5 text-purple-600"
+                strokeWidth={2}
+              />
+              <span className="text-xs font-semibold text-purple-700">
+                {document.flashcardCount} Flashcards
+              </span>
             </div>
           )}
 
           {/* Quizzes Section */}
           {document.quizCount !== undefined && (
             <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-emerald-50 rounded-lg shrink-0">
-              <BrainCircuit className="w-3.5 h-3.5 text-emerald-600" strokeWidth={2} />
-              <span className="text-xs font-semibold text-emerald-700">{document.quizCount} Quizzes</span>
+              <BrainCircuit
+                className="w-3.5 h-3.5 text-emerald-600"
+                strokeWidth={2}
+              />
+              <span className="text-xs font-semibold text-emerald-700">
+                {document.quizCount} Quizzes
+              </span>
             </div>
           )}
         </div>

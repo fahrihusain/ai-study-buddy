@@ -68,24 +68,34 @@ const ProfilePage = () => {
       <div className="space-y-8">
         {/* User information display */}
         <div className="bg-white border border-neutral-200 rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-neutral-900 mb-4">User Information</h3>
+          <h3 className="text-lg font-semibold text-neutral-900 mb-4">
+            User Information
+          </h3>
           <div className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-neutral-700 mb-1.5">Username</label>
+              <label className="block text-xs font-medium text-neutral-700 mb-1.5">
+                Username
+              </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <User className="h-4 w-4 text-neutral-400" />
                 </div>
-                <p className="w-full h-9 pl-9 pr-3 pt-2 border border-neutral-200 rounded-lg bg-neutral-50 text-sm text-neutral-900">{username}</p>
+                <p className="w-full h-9 pl-9 pr-3 pt-2 border border-neutral-200 rounded-lg bg-neutral-50 text-sm text-neutral-900">
+                  {username}
+                </p>
               </div>
             </div>
             <div>
-              <label className="block text-xs font-medium text-neutral-700 mb-1.5">Email Adress</label>
+              <label className="block text-xs font-medium text-neutral-700 mb-1.5">
+                Email Adress
+              </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Mail className="h-4 w-4 text-neutral-400" />
                 </div>
-                <p className="w-full h-9 pl-9 pr-3 pt-2 border border-neutral-200 rounded-lg bg-neutral-50 text-sm text-neutral-900 ">{email}</p>
+                <p className="w-full h-9 pl-9 pr-3 pt-2 border border-neutral-200 rounded-lg bg-neutral-50 text-sm text-neutral-900 ">
+                  {email}
+                </p>
               </div>
             </div>
           </div>
@@ -93,10 +103,15 @@ const ProfilePage = () => {
 
         {/* Change Password form */}
         <div className="bg-white border border-neutral-200 rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-neutral-900 mb-4">Change Password</h3>
+          <h3 className="text-lg font-semibold text-neutral-900 mb-4">
+            Change Password
+          </h3>
           <form className="space-y-4" onSubmit={handleChangePassword}>
             <div>
-              <label htmlFor="" className="block text-xs font-medium text-neutral-700 mb-1.5">
+              <label
+                htmlFor=""
+                className="block text-xs font-medium text-neutral-700 mb-1.5"
+              >
                 Current Password
               </label>
               <div className="relative">
@@ -113,7 +128,10 @@ const ProfilePage = () => {
               </div>
             </div>
             <div>
-              <label htmlFor="" className="block text-xs font-medium text-neutral-700 mb-1.5">
+              <label
+                htmlFor=""
+                className="block text-xs font-medium text-neutral-700 mb-1.5"
+              >
                 New Password
               </label>
               <div className="relative">
@@ -130,7 +148,10 @@ const ProfilePage = () => {
               </div>
             </div>
             <div>
-              <label htmlFor="" className="block text-xs font-medium text-neutral-700 mb-1.5">
+              <label
+                htmlFor=""
+                className="block text-xs font-medium text-neutral-700 mb-1.5"
+              >
                 Confirm New Password
               </label>
               <div className="relative">

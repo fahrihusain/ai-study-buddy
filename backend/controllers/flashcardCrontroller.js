@@ -29,7 +29,9 @@ export const getFlashcards = async (req, res, next) => {
 
 export const getAllFlashcardSets = async (req, res, next) => {
   try {
-    const flashcardSets = await Flashcard.find({ userId: req.user._id }).populate("documentId", "title").sort({ createdAt: -1 });
+    const flashcardSets = await Flashcard.find({ userId: req.user._id })
+      .populate("documentId", "title")
+      .sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,
@@ -60,7 +62,9 @@ export const reviewFlashcard = async (req, res, next) => {
       });
     }
 
-    const cardIndex = flashcardSet.cards.findIndex((card) => card._id.toString() === req.params.cardId);
+    const cardIndex = flashcardSet.cards.findIndex(
+      (card) => card._id.toString() === req.params.cardId,
+    );
 
     if (cardIndex === -1) {
       return res.status(404).json({
@@ -105,7 +109,9 @@ export const toggleStarFlashcard = async (req, res, next) => {
       });
     }
 
-    const cardIndex = flashcardSet.cards.findIndex((card) => card._id.toString() === req.params.cardId);
+    const cardIndex = flashcardSet.cards.findIndex(
+      (card) => card._id.toString() === req.params.cardId,
+    );
 
     if (cardIndex === -1) {
       return res.status(404).json({
@@ -116,7 +122,8 @@ export const toggleStarFlashcard = async (req, res, next) => {
     }
 
     //Toggle star
-    flashcardSet.cards[cardIndex].isStarred = !flashcardSet.cards[cardIndex].isStarred;
+    flashcardSet.cards[cardIndex].isStarred =
+      !flashcardSet.cards[cardIndex].isStarred;
 
     await flashcardSet.save();
 

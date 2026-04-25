@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/authService";
-import { BrainCircuit, Mail, Lock, ArrowRight, User, Eye, EyeOff } from "lucide-react";
+import {
+  BrainCircuit,
+  Mail,
+  Lock,
+  ArrowRight,
+  User,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 import toast from "react-hot-toast";
 
 const RegisterPage = () => {
@@ -51,17 +59,25 @@ const RegisterPage = () => {
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-linear-to-br from-emerald-400 to-teal-500 shadow-lg shadow-emerald-500/25 mb-6  ">
               <BrainCircuit className="w-7 h-7 text-white" strokeWidth={2} />
             </div>
-            <h1 className="text-2xl font-medium text-slate-900 tracking-tight mb-2 ">Create an account </h1>
-            <p className="text-slate-500 text-sm">Start your AI-powerd learnig experiance</p>
+            <h1 className="text-2xl font-medium text-slate-900 tracking-tight mb-2 ">
+              Create an account{" "}
+            </h1>
+            <p className="text-slate-500 text-sm">
+              Start your AI-powerd learnig experiance
+            </p>
           </div>
 
           {/* Form */}
           <form className="space-y-5">
             {/* Username field */}
             <div className="space-y-2">
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide ">Username</label>
+              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide ">
+                Username
+              </label>
               <div className="relative group">
-                <div className={`absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors duration-200 ${focusedField === "username" ? "text-emerald-500" : "text-slate-400"}`}>
+                <div
+                  className={`absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors duration-200 ${focusedField === "username" ? "text-emerald-500" : "text-slate-400"}`}
+                >
                   <User className="h-5 w-5" strokeWidth={2} />
                 </div>
                 <input
@@ -78,9 +94,13 @@ const RegisterPage = () => {
 
             {/* Email Field*/}
             <div className="space-y-2">
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide">Email</label>
+              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide">
+                Email
+              </label>
               <div className="relative group">
-                <div className={`absolute inset-y-0 pl-4 flex items-center pointer-events-none transition-colors duration-200 ${focusedField === "email" ? "text-emerald-500" : "text-slate-400"}`}>
+                <div
+                  className={`absolute inset-y-0 pl-4 flex items-center pointer-events-none transition-colors duration-200 ${focusedField === "email" ? "text-emerald-500" : "text-slate-400"}`}
+                >
                   <Mail className="h-5 w-5" strokeWidth={2} />
                 </div>
                 <input
@@ -97,12 +117,20 @@ const RegisterPage = () => {
 
             {/* Password field */}
             <div className="space-y-2">
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide">Password</label>
+              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide">
+                Password
+              </label>
               <div className="relative group">
-                <div className={`absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors duration-200 ${focusedField === "password" ? "text-emerald-500" : "text-slate-400"} `}>
+                <div
+                  className={`absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors duration-200 ${focusedField === "password" ? "text-emerald-500" : "text-slate-400"} `}
+                >
                   <Lock className="h-5 w-5" strokeWidth={2} />
                 </div>
-                <button type="button" onClick={togglePasswordVisibility} className="absolute text-slate-500 right-3 top-3">
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute text-slate-500 right-3 top-3"
+                >
                   {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
                 </button>
                 <input
@@ -120,7 +148,9 @@ const RegisterPage = () => {
             {/* Error message */}
             {error && (
               <div className="rounded-lg bg-red-50 border border-red-200 p-3">
-                <p className="text-xs text-red-600 font-medium text-center">{error}</p>
+                <p className="text-xs text-red-600 font-medium text-center">
+                  {error}
+                </p>
               </div>
             )}
 
@@ -139,7 +169,10 @@ const RegisterPage = () => {
                 ) : (
                   <>
                     Create account
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" strokeWidth={2.5} />
+                    <ArrowRight
+                      className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
+                      strokeWidth={2.5}
+                    />
                   </>
                 )}
               </span>
@@ -151,7 +184,10 @@ const RegisterPage = () => {
           <div className="mt-8 pt-6 border-t border-slate-200/60">
             <p className="text-center text-sm text-slate-600 ">
               Already have account?{" "}
-              <Link to="/login" className="font-semibold text-emerald-600 hover:text-emerald-700 transition-colors duration-200">
+              <Link
+                to="/login"
+                className="font-semibold text-emerald-600 hover:text-emerald-700 transition-colors duration-200"
+              >
                 Sign in
               </Link>
             </p>
@@ -159,7 +195,9 @@ const RegisterPage = () => {
         </div>
 
         {/* Subtle footer text */}
-        <p className="text-center text-xs text-slate-400 mt-6 ">By continuing, you agree to our Terms & Privacy Policy</p>
+        <p className="text-center text-xs text-slate-400 mt-6 ">
+          By continuing, you agree to our Terms & Privacy Policy
+        </p>
       </div>
     </div>
   );

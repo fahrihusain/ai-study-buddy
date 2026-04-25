@@ -64,8 +64,15 @@ const DocumentDetailPage = () => {
     return (
       <div className="bg-white border border-gray-300 rounded-lg overflow-hidden shadow-sm">
         <div className="flex items-center justify-between p-4 bg-gray-50 border-b border-gray-300">
-          <span className="text-sm font-medium text-gray-700">Document Viewer </span>
-          <a href={pdfUrl} className="inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors" target="_blank" rel="noopener noreferrer">
+          <span className="text-sm font-medium text-gray-700">
+            Document Viewer{" "}
+          </span>
+          <a
+            href={pdfUrl}
+            className="inline-flex items-center gap-1.5 text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <ExternalLink size={16} />
             Open in new tab
           </a>
@@ -121,7 +128,10 @@ const DocumentDetailPage = () => {
   return (
     <div>
       <div className="mb-4">
-        <Link to="/documents" className="inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 transition-colors ">
+        <Link
+          to="/documents"
+          className="inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 transition-colors "
+        >
           <ArrowLeft size={16} />
           Back to documents
         </Link>

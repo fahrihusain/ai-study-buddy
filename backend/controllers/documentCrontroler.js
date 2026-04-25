@@ -163,8 +163,14 @@ export const getDocument = async (req, res, next) => {
     }
 
     //Get counts of associated flashcards and quizzes
-    const flashcardCount = await Flashcard.countDocuments({ documentId: document._id, userId: req.user._id });
-    const quizCount = await Quiz.countDocuments({ documentId: document._id, userId: req.user._id });
+    const flashcardCount = await Flashcard.countDocuments({
+      documentId: document._id,
+      userId: req.user._id,
+    });
+    const quizCount = await Quiz.countDocuments({
+      documentId: document._id,
+      userId: req.user._id,
+    });
 
     // Update last accessed
     document.lastAccessed = Date.now();

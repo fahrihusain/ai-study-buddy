@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Plus, ChevronLeft, ChevronRight, Trash2 } from "lucide-react";
+import {
+  ArrowLeft,
+  Plus,
+  ChevronLeft,
+  ChevronRight,
+  Trash2,
+} from "lucide-react";
 import toast from "react-hot-toast";
 
 import flashcardService from "../../services/flashCardService";
@@ -60,7 +66,9 @@ const FlashcardPage = () => {
 
   const handlePrevCard = () => {
     handleReview(currentCardIndex);
-    setCurrentCardIndex((prevIndex) => (prevIndex - 1 + flashcards.length) % flashcards.length);
+    setCurrentCardIndex(
+      (prevIndex) => (prevIndex - 1 + flashcards.length) % flashcards.length,
+    );
   };
 
   const handleReview = async (index) => {
@@ -78,7 +86,11 @@ const FlashcardPage = () => {
   const handleToggleStar = async (cardId) => {
     try {
       await flashcardService.toggleStar(cardId);
-      setFlashcards((prevFlashcards) => prevFlashcards.map((card) => (card._id === cardId ? { ...card, isStarred: !card.isStarred } : card)));
+      setFlashcards((prevFlashcards) =>
+        prevFlashcards.map((card) =>
+          card._id === cardId ? { ...card, isStarred: !card.isStarred } : card,
+        ),
+      );
       toast.success("Flashcard status updated!");
     } catch (error) {
       toast.error("Failed to update star status");
@@ -105,7 +117,12 @@ const FlashcardPage = () => {
     }
 
     if (flashcards.length === 0) {
-      return <EmptyState title="No Flashcard Yet" description="Generate flashcard from you document to start learning" />;
+      return (
+        <EmptyState
+          title="No Flashcard Yet"
+          description="Generate flashcard from you document to start learning"
+        />
+      );
     }
 
     const currentCard = flashcards[currentCardIndex];
@@ -116,13 +133,21 @@ const FlashcardPage = () => {
           <Flashcard flashcard={currentCard} onToggleStar={handleToggleStar} />
         </div>
         <div className="flex items-center gap-4">
-          <Button onClick={handlePrevCard} variant="secondary" disabled={flashcards.length <= 1}>
+          <Button
+            onClick={handlePrevCard}
+            variant="secondary"
+            disabled={flashcards.length <= 1}
+          >
             <ChevronLeft size={16} /> Prev
           </Button>
           <span className="text-sm text-neutral-600 ">
             {currentCardIndex + 1} / {flashcards.length}
           </span>
-          <Button onClick={handleNextCard} variant="secondary" disabled={flashcards.length <= 1}>
+          <Button
+            onClick={handleNextCard}
+            variant="secondary"
+            disabled={flashcards.length <= 1}
+          >
             Next <ChevronRight size={16} />
           </Button>
         </div>
@@ -133,7 +158,10 @@ const FlashcardPage = () => {
   return (
     <div>
       <div className="mb-4">
-        <Link to={`/documents/${documentId}`} className="inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 transition-colors ">
+        <Link
+          to={`/documents/${documentId}`}
+          className="inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 transition-colors "
+        >
           <ArrowLeft size={16} />
           Back to document
         </Link>
@@ -144,7 +172,10 @@ const FlashcardPage = () => {
           {!loading &&
             (flashcards.length > 0 ? (
               <>
-                <Button onClick={() => setIsDeleteModalOpen(true)} disabled={deleting}>
+                <Button
+                  onClick={() => setIsDeleteModalOpen(true)}
+                  disabled={deleting}
+                >
                   <Trash2 size={16} /> Delete Set
                 </Button>
               </>
@@ -164,14 +195,32 @@ const FlashcardPage = () => {
 
       {renderFlashcardContent()}
 
-      <Modal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} title="Confirm Delete Flashcard Set">
+      <Modal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        title="Confirm Delete Flashcard Set"
+      >
         <div className="space-x-4">
-          <p className="text-sm text-neutral-600 ">Are you sure you want to delete all flashcards for this document? this action cannot be undone</p>
+          <p className="text-sm text-neutral-600 ">
+            Are you sure you want to delete all flashcards for this document?
+            this action cannot be undone
+          </p>
           <div className="flex justify-end gap-2 pt-2">
-            <Button type="button" variant="secondary" onClick={() => setIsDeleteModalOpen(false)} disabled={deleting}>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => setIsDeleteModalOpen(false)}
+              disabled={deleting}
+            >
               Cancel
             </Button>
-            <Button type="button" variant="secondary" onClick={handleDeleteFlashcardSet} disabled={deleting} className="bg-red-500 hover:bg-red-600 active:bg-red-700 focus:ring-red-500">
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={handleDeleteFlashcardSet}
+              disabled={deleting}
+              className="bg-red-500 hover:bg-red-600 active:bg-red-700 focus:ring-red-500"
+            >
               {deleting ? "Deleting..." : "Delete"}
             </Button>
           </div>

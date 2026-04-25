@@ -38,7 +38,10 @@ export const generateFlashcards = async (req, res, next) => {
     }
 
     //Generate flashcard using gemini
-    const cards = await geminiService.generateFlashcards(document.extractedText, parseInt(count));
+    const cards = await geminiService.generateFlashcards(
+      document.extractedText,
+      parseInt(count),
+    );
 
     //Save to database
     const flashcardSet = await Flashcard.create({
@@ -91,7 +94,10 @@ export const generateQuiz = async (req, res, next) => {
     }
 
     //Generate quiz using gemini
-    const questions = await geminiService.generateQuiz(document.extractedText, parseInt(numQustions));
+    const questions = await geminiService.generateQuiz(
+      document.extractedText,
+      parseInt(numQustions),
+    );
 
     //Save to database
     const quiz = await Quiz.create({
@@ -209,7 +215,10 @@ export const chat = async (req, res, next) => {
     }
 
     //Generate response using gemini
-    const answer = await geminiService.chatWithContext(question, relevantChunks);
+    const answer = await geminiService.chatWithContext(
+      question,
+      relevantChunks,
+    );
     // const answer = "Ini adalah jawaban palsu untuk hemat kuota API."; // Pakai ini dulu
     //save conversation
     chatHistory.messages.push(

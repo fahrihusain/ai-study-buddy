@@ -37,7 +37,10 @@ const AIActions = () => {
     setLoadingAction("explain");
 
     try {
-      const { explanation } = await aiService.explainConcept(documentId, concept);
+      const { explanation } = await aiService.explainConcept(
+        documentId,
+        concept,
+      );
       setModalTitle(`Explanation of ${concept}`);
       setModalContent(explanation);
       setIsModalOpen(true);
@@ -59,7 +62,9 @@ const AIActions = () => {
               <Sparkles className="w-5 h-5 text-white " strokeWidth={2} />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-slate-900 ">AI Assisstant</h3>
+              <h3 className="text-lg font-semibold text-slate-900 ">
+                AI Assisstant
+              </h3>
               <p className="text-xs text-slate-500">Powered By Advance AI</p>
             </div>
           </div>
@@ -72,11 +77,18 @@ const AIActions = () => {
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2 ">
                   <div className="w-8 h-8 rounded-lg bg-linear-to-br from-blue-100 to-cyan-100 flex items-center justify-center ">
-                    <BookOpen className="w-4 h-4 text-blue-600" strokeWidth={2} />
+                    <BookOpen
+                      className="w-4 h-4 text-blue-600"
+                      strokeWidth={2}
+                    />
                   </div>
-                  <h4 className="font-semibold text-slate-900">Generate Summary</h4>
+                  <h4 className="font-semibold text-slate-900">
+                    Generate Summary
+                  </h4>
                 </div>
-                <p className="text-sm text-slate-600 leading-relaxed">Get a concise summary of the entire document</p>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  Get a concise summary of the entire document
+                </p>
               </div>
               <button
                 className="shrink-0 h-10 px-5 bg-linear-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white text-sm font-semibold rounded-xl transition-all duration-200 shadow-lg shadow-blue-500/25 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
@@ -100,11 +112,19 @@ const AIActions = () => {
             <form onSubmit={handleExplainConcept}>
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-8 h-8 rounded-lg bg-linear-to-br from-amber-100 to-orange-100 flex items-center justify-center">
-                  <Lightbulb className="w-4 h-4 text-amber-600" strokeWidth={2} />
+                  <Lightbulb
+                    className="w-4 h-4 text-amber-600"
+                    strokeWidth={2}
+                  />
                 </div>
-                <h4 className="font-semibold text-slate-900">Explain a concept</h4>
+                <h4 className="font-semibold text-slate-900">
+                  Explain a concept
+                </h4>
               </div>
-              <p className="text-sm text-slate-600 leading-relaxed mb-4 ">Enter a topic or concept from the document to get detailed explanation.</p>
+              <p className="text-sm text-slate-600 leading-relaxed mb-4 ">
+                Enter a topic or concept from the document to get detailed
+                explanation.
+              </p>
               <div className="flex items-center gap-3">
                 <input
                   type="text"
@@ -135,7 +155,11 @@ const AIActions = () => {
       </div>
 
       {/* Result Modal */}
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={modalTitle}>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title={modalTitle}
+      >
         <div className="max-h-[60vh] overflow-y-auto prose prose-sm max-w-none prose-slate">
           <MarkdownRenderer content={modalContent} />
         </div>

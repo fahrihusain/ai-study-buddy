@@ -8,7 +8,9 @@ dotenv.config();
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 if (!process.env.GEMINI_API_KEY) {
-  console.error("FATAl ERROR : GEMINI_API_KEY is not set in the environment variables.");
+  console.error(
+    "FATAl ERROR : GEMINI_API_KEY is not set in the environment variables.",
+  );
   process.exit(1);
 }
 
@@ -133,7 +135,13 @@ export const generateQuiz = async (text, numQuestions = 5) => {
       }
 
       if (question && options.length === 4 && correctAnswer) {
-        questions.push({ question, options, correctAnswer, explanation, difficulty });
+        questions.push({
+          question,
+          options,
+          correctAnswer,
+          explanation,
+          difficulty,
+        });
       }
     }
     return questions.slice(0, numQuestions);
@@ -177,7 +185,9 @@ export const generateSummary = async (text) => {
  */
 
 export const chatWithContext = async (question, chunks) => {
-  const context = chunks.map((c, i) => `[Chunk ${i + 1}]\n${c.content}`).join("\n\n");
+  const context = chunks
+    .map((c, i) => `[Chunk ${i + 1}]\n${c.content}`)
+    .join("\n\n");
 
   console.log("context_____", context);
 

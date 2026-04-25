@@ -1,5 +1,11 @@
 import express from "express";
-import { getFlashcards, getAllFlashcardSets, reviewFlashcard, toggleStarFlashcard, deleteFlashcardSet } from "../controllers/flashcardCrontroller.js";
+import {
+  getFlashcards,
+  getAllFlashcardSets,
+  reviewFlashcard,
+  toggleStarFlashcard,
+  deleteFlashcardSet,
+} from "../controllers/flashcardCrontroller.js";
 import { protect } from "../middleware/auth.js";
 
 const router = express.Router();

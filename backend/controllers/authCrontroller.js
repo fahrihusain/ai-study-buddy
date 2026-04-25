@@ -21,7 +21,10 @@ export const register = async (req, res, next) => {
     if (userExists) {
       return res.status(400).json({
         success: false,
-        error: userExists.email === email ? "Email already registered" : "Email already taken",
+        error:
+          userExists.email === email
+            ? "Email already registered"
+            : "Email already taken",
         statusCode: 400,
       });
     }

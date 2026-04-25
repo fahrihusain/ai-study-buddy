@@ -26,17 +26,24 @@ const QuizCard = ({ quiz, onDelete }) => {
         </div>
 
         <div>
-          <h3 className="text-base font-semibold text-slate-900 mb-1 line-clamp-2" title={quiz.title}>
-            {quiz.title || `Quiz - ${moment(quiz.createAt).format("MMM D, YYYY")}`}
+          <h3
+            className="text-base font-semibold text-slate-900 mb-1 line-clamp-2"
+            title={quiz.title}
+          >
+            {quiz.title ||
+              `Quiz - ${moment(quiz.createAt).format("MMM D, YYYY")}`}
           </h3>
-          <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">Created {moment(quiz.createAt).format("MMM D, YYYY")}</p>
+          <p className="text-xs font-medium text-slate-500 uppercase tracking-wide">
+            Created {moment(quiz.createAt).format("MMM D, YYYY")}
+          </p>
         </div>
 
         {/* Quiz info */}
         <div className="flex items-center gap-3 pt-2 border-t border-slate-100 ">
           <div className="px-3 py-1 bg-slate-50 border border-slate-200 rounded-lg">
             <span className="text-sm font-semibold text-slate-700">
-              {quiz.questions.length} {quiz.questions.length === 1 ? "Question" : "Question"}
+              {quiz.questions.length}{" "}
+              {quiz.questions.length === 1 ? "Question" : "Question"}
             </span>
           </div>
         </div>

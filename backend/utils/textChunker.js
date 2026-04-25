@@ -60,7 +60,10 @@ export const chunkText = (text, chunkSize = 500, overlap = 50) => {
     }
 
     //if adding this paragraph exceeds chunk size , save current chunk
-    if (currentWordCount + paragraphWordCount > chunkSize && currentChunk.length > 0) {
+    if (
+      currentWordCount + paragraphWordCount > chunkSize &&
+      currentChunk.length > 0
+    ) {
       chunks.push({
         content: currentChunk.join("\n\n"),
         chunkIndex: chunkIndex++,
@@ -71,7 +74,9 @@ export const chunkText = (text, chunkSize = 500, overlap = 50) => {
 
       const prevChunkText = currentChunk.join(" ");
       const prevWords = prevChunkText.split(/\s+/);
-      const overlapText = prevWords.slice(-Math.min(overlap, prevWords.length)).join(" ");
+      const overlapText = prevWords
+        .slice(-Math.min(overlap, prevWords.length))
+        .join(" ");
 
       currentChunk = [overlapText, paragraph.trim()];
       currentWordCount = overlapText.split(/\s+/).length + paragraphWordCount;
@@ -124,7 +129,28 @@ export const findRelevantChunks = (chunks, query, maxChunks = 3) => {
   }
 
   //common stop words to exclude
-  const stopWords = new Set(["the", "is", "at", "which", "on", "a", "an", "and", "or", "but", "in", "with", "to", "for", "of", "as", "by", "this", "that", "it"]);
+  const stopWords = new Set([
+    "the",
+    "is",
+    "at",
+    "which",
+    "on",
+    "a",
+    "an",
+    "and",
+    "or",
+    "but",
+    "in",
+    "with",
+    "to",
+    "for",
+    "of",
+    "as",
+    "by",
+    "this",
+    "that",
+    "it",
+  ]);
 
   //Extract end clear query words
   const queryWords = query
@@ -152,17 +178,22 @@ export const findRelevantChunks = (chunks, query, maxChunks = 3) => {
     //Score each query word
     for (const word of queryWords) {
       //Exact word match (higher score)
-      const exactMatches = (content.match(new RegExp(`\\b${word}\\b`, "g")) || []).length;
+      const exactMatches = (
+        content.match(new RegExp(`\\b${word}\\b`, "g")) || []
+      ).length;
       score += exactMatches * 3;
 
       //Partial match (lower score)
 
-      const partialMatches = (content.match(new RegExp(word, "g")) || []).length;
+      const partialMatches = (content.match(new RegExp(word, "g")) || [])
+        .length;
       score += Math.max(0, partialMatches - exactMatches) * 1.5;
     }
 
     //Bonus : Multiple query word found
-    const uniqueWordsFound = queryWords.filter((word) => content.includes(word)).length;
+    const uniqueWordsFound = queryWords.filter((word) =>
+      content.includes(word),
+    ).length;
     if (uniqueWordsFound > 1) {
       score += uniqueWordsFound * 2;
     }

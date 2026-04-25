@@ -43,7 +43,11 @@ const ChatInterface = () => {
     e.preventDefault();
     if (!message.trim()) return;
 
-    const userMessage = { role: "user", content: message, timestamp: new Date() };
+    const userMessage = {
+      role: "user",
+      content: message,
+      timestamp: new Date(),
+    };
     setHistory((prev) => [...prev, userMessage]);
     setMessage("");
     setLoading(true);
@@ -74,13 +78,18 @@ const ChatInterface = () => {
   const renderMessage = (msg, index) => {
     const isUser = msg.role === "user";
     return (
-      <div key={index} className={`flex items-start gap-3 my-4 ${isUser ? "justify-end" : ""}`}>
+      <div
+        key={index}
+        className={`flex items-start gap-3 my-4 ${isUser ? "justify-end" : ""}`}
+      >
         {!isUser && (
           <div className="w-9 h-9 rounded-xl bg-linear-to-br from-emerald-400 to-teal-500 shadow-lg shadow-emerald-500/25 flex items-center justify-center shrink-0 ">
             <Sparkles className="w-4 h-4 text-white" strokeWidth={2} />
           </div>
         )}
-        <div className={`max-w-lg p-4 rounded-2xl shadow-sm ${isUser ? "bg-linear-to-br from-emerald-500 to-teal-500 text-white rounded-br-md" : "bg-white border border-slate-200/60 text-slate-800 rounded-bl-md"}`}>
+        <div
+          className={`max-w-lg p-4 rounded-2xl shadow-sm ${isUser ? "bg-linear-to-br from-emerald-500 to-teal-500 text-white rounded-br-md" : "bg-white border border-slate-200/60 text-slate-800 rounded-bl-md"}`}
+        >
           {isUser ? (
             <p className="text-sm leading-relaxed">{msg.content}</p>
           ) : (
@@ -90,7 +99,9 @@ const ChatInterface = () => {
           )}
         </div>
         {isUser && (
-          <div className="w-9 h-9 rounded-xl bg-linear-to-br from-slate-200 to-slate-300 flex items-center justify-center text-slate-700 font-semibold text-sm shrink-0 shadow-sm">{user?.username?.charAt(0).toUpperCase() || "U"}</div>
+          <div className="w-9 h-9 rounded-xl bg-linear-to-br from-slate-200 to-slate-300 flex items-center justify-center text-slate-700 font-semibold text-sm shrink-0 shadow-sm">
+            {user?.username?.charAt(0).toUpperCase() || "U"}
+          </div>
         )}
       </div>
     );
@@ -103,7 +114,9 @@ const ChatInterface = () => {
           <MessageSquare className="w-7 h-7 text-emerald-600" strokeWidth={2} />
         </div>
         <Spinner />
-        <p className="text-sm text-slate-500 mt-3 font-medium">loading chat history...</p>
+        <p className="text-sm text-slate-500 mt-3 font-medium">
+          loading chat history...
+        </p>
       </div>
     );
   }
@@ -115,10 +128,17 @@ const ChatInterface = () => {
         {history.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <div className="w-16 h-16 rounded-xl bg-linear-to-br from-emerald-100 to-teal-100 flex items-center justify-center mb-4 shadow-lg shadow-emerald-500/10">
-              <MessageSquare className="w-8 h-8 text-emerald-600 " strokeWidth={2} />
+              <MessageSquare
+                className="w-8 h-8 text-emerald-600 "
+                strokeWidth={2}
+              />
             </div>
-            <h3 className="text-base font-semibold text-slate-900 mb-2">Start a conversation</h3>
-            <p className="text-sm text-slate-500">Ask me anything about document!</p>
+            <h3 className="text-base font-semibold text-slate-900 mb-2">
+              Start a conversation
+            </h3>
+            <p className="text-sm text-slate-500">
+              Ask me anything about document!
+            </p>
           </div>
         ) : (
           history.map(renderMessage)
@@ -131,9 +151,18 @@ const ChatInterface = () => {
             </div>
             <div className="flex items-center gap-2 px-4 py-3 rounded-2xl rounded-bl-md bg-white border border-slate-200/60">
               <div className="flex gap-1">
-                <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
-                <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
-                <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
+                <span
+                  className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"
+                  style={{ animationDelay: "0ms" }}
+                ></span>
+                <span
+                  className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"
+                  style={{ animationDelay: "150ms" }}
+                ></span>
+                <span
+                  className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"
+                  style={{ animationDelay: "300ms" }}
+                ></span>
               </div>
             </div>
           </div>

@@ -14,7 +14,10 @@ export const getDashboard = async (req, res, next) => {
     const totalDocuments = await Document.countDocuments({ userId });
     const totalFlashcardSets = await Flashcard.countDocuments({ userId });
     const totalQuizzes = await Quiz.countDocuments({ userId });
-    const completedQuizzes = await Quiz.countDocuments({ userId, completedAt: { $ne: null } });
+    const completedQuizzes = await Quiz.countDocuments({
+      userId,
+      completedAt: { $ne: null },
+    });
 
     //Get flashcard statistics
     const flashcardSets = await Flashcard.find({ userId });
@@ -30,12 +33,24 @@ export const getDashboard = async (req, res, next) => {
 
     //Get quiz statistics
     const quizzes = await Quiz.find({ userId, completedAt: { $ne: null } });
-    const averageScore = quizzes.length > 0 ? Math.round(quizzes.reduce((sum, q) => sum + q.score, 0) / quizzes.length) : 0;
+    const averageScore =
+      quizzes.length > 0
+        ? Math.round(
+            quizzes.reduce((sum, q) => sum + q.score, 0) / quizzes.length,
+          )
+        : 0;
 
     //Recent activity
-    const recentDocuments = await Document.find({ userId }).sort({ lastAccessed: -1 }).limit(5).select("titlt fileName lastAccessed status");
+    const recentDocuments = await Document.find({ userId })
+      .sort({ lastAccessed: -1 })
+      .limit(5)
+      .select("titlt fileName lastAccessed status");
 
-    const recentQuizzes = await Quiz.find({ userId }).sort({ createdAt: -1 }).limit(5).populate("documentId", "title").select("title score totalQuestions completedAt");
+    const recentQuizzes = await Quiz.find({ userId })
+      .sort({ createdAt: -1 })
+      .limit(5)
+      .populate("documentId", "title")
+      .select("title score totalQuestions completedAt");
 
     //Study streak (simplified - in production, track daily activity)
     const studyStreak = Math.floor(Math.random() * 7) + 1; //Mock data

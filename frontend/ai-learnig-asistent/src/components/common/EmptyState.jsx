@@ -8,7 +8,9 @@ const EmptyState = ({ onActinClick, title, description, buttonText }) => {
         <FileText className="w-8 h-8 text-slate-400" strokeWidth={2} />
       </div>
       <h3 className="text-lg font-semibold text-slate-900 mb-2">{title}</h3>
-      <p className="text-sm text-slate-500 mb-8 max-w-sm leading-relaxed">{description}</p>
+      <p className="text-sm text-slate-500 mb-8 max-w-sm leading-relaxed">
+        {description}
+      </p>
       {buttonText && onActinClick && (
         <button
           className="group relative inline-flex items-center gap-2 px-6 h-11 bg-linear-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-semibold text-sm rounded-xl transition-all duration-200 shadow-lg shadow-emerald-500/25 active:scale-95 focus:outline-none focus:ring-4 focus:ring-emerald-500/20 overflow-hidden"
