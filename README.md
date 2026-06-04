@@ -24,32 +24,32 @@ Aplikasi web full-stack yang membantu pengguna belajar lebih efektif dengan mema
 
 ### Backend
 
-| Teknologi | Keterangan |
-|---|---|
-| Node.js + Express 5 | Framework server |
-| MongoDB + Mongoose | Database dan ODM |
-| Google Gemini AI (`@google/genai`) | Generasi konten AI |
-| JSON Web Token (JWT) | Autentikasi |
-| bcryptjs | Enkripsi password |
-| Multer | Upload file |
-| pdf-parse | Ekstraksi teks dari PDF |
-| express-validator | Validasi input |
-| dotenv | Manajemen environment variable |
-| nodemon | Hot reload saat development |
+| Teknologi                          | Keterangan                     |
+| ---------------------------------- | ------------------------------ |
+| Node.js + Express 5                | Framework server               |
+| MongoDB + Mongoose                 | Database dan ODM               |
+| Google Gemini AI (`@google/genai`) | Generasi konten AI             |
+| JSON Web Token (JWT)               | Autentikasi                    |
+| bcryptjs                           | Enkripsi password              |
+| Multer                             | Upload file                    |
+| pdf-parse                          | Ekstraksi teks dari PDF        |
+| express-validator                  | Validasi input                 |
+| dotenv                             | Manajemen environment variable |
+| nodemon                            | Hot reload saat development    |
 
 ### Frontend
 
-| Teknologi | Keterangan |
-|---|---|
-| React 19 + Vite 8 | Framework UI dan build tool |
-| React Router DOM 7 | Routing |
-| Tailwind CSS 4 | Styling |
-| Axios | HTTP client |
-| react-markdown + remark-gfm | Render konten Markdown |
-| react-syntax-highlighter | Highlight kode dalam chat |
-| react-hot-toast | Notifikasi |
-| lucide-react | Ikon |
-| moment.js | Format tanggal dan waktu |
+| Teknologi                   | Keterangan                  |
+| --------------------------- | --------------------------- |
+| React 19 + Vite 8           | Framework UI dan build tool |
+| React Router DOM 7          | Routing                     |
+| Tailwind CSS 4              | Styling                     |
+| Axios                       | HTTP client                 |
+| react-markdown + remark-gfm | Render konten Markdown      |
+| react-syntax-highlighter    | Highlight kode dalam chat   |
+| react-hot-toast             | Notifikasi                  |
+| lucide-react                | Ikon                        |
+| moment.js                   | Format tanggal dan waktu    |
 
 ---
 
@@ -188,31 +188,33 @@ Aplikasi frontend akan berjalan di `http://localhost:5173`.
 
 ## API Endpoints
 
-| Method | Endpoint | Keterangan |
-|---|---|---|
-| POST | `/api/auth/register` | Registrasi pengguna baru |
-| POST | `/api/auth/login` | Login pengguna |
-| GET | `/api/auth/profile` | Ambil profil pengguna |
-| PUT | `/api/auth/profile` | Update profil pengguna |
-| POST | `/api/auth/change-password` | Ganti password |
-| GET | `/api/documents` | Ambil semua dokumen pengguna |
-| POST | `/api/documents/upload` | Upload dokumen PDF |
-| GET | `/api/documents/:id` | Ambil detail dokumen |
-| DELETE | `/api/documents/:id` | Hapus dokumen |
-| POST | `/api/ai/generate-flashcards` | Generate flashcard dari dokumen |
-| POST | `/api/ai/generate-quiz` | Generate kuis dari dokumen |
-| POST | `/api/ai/generate-summary` | Generate ringkasan dokumen |
-| POST | `/api/ai/chat` | Tanya-jawab berbasis dokumen |
-| POST | `/api/ai/explain-concept` | Penjelasan konsep dari dokumen |
-| GET | `/api/ai/chat-history/:documentId` | Ambil riwayat chat |
-| GET | `/api/flashcards` | Ambil semua set flashcard |
-| GET | `/api/flashcards/:documentId` | Ambil flashcard per dokumen |
-| POST | `/api/flashcards/:cardId/review` | Tandai flashcard sudah direview |
-| PUT | `/api/flashcards/:cardId/star` | Toggle bintang pada flashcard |
-| DELETE | `/api/flashcards/:id` | Hapus set flashcard |
-| GET | `/api/quizzes/:documentId` | Ambil kuis per dokumen |
-| GET | `/api/quizzes/quiz/:id` | Ambil detail kuis |
-| POST | `/api/quizzes/:id/submit` | Submit jawaban kuis |
-| GET | `/api/quizzes/:id/results` | Ambil hasil kuis |
-| DELETE | `/api/quizzes/:id` | Hapus kuis |
-| GET | `/api/progress/dashboard` | Ambil statistik progres belajar |
+| Method | Endpoint                           | Keterangan                      |
+| ------ | ---------------------------------- | ------------------------------- |
+| POST   | `/api/auth/register`               | Registrasi pengguna baru        |
+| POST   | `/api/auth/login`                  | Login pengguna                  |
+| GET    | `/api/auth/profile`                | Ambil profil pengguna           |
+| PUT    | `/api/auth/profile`                | Update profil pengguna          |
+| POST   | `/api/auth/change-password`        | Ganti password                  |
+| GET    | `/api/documents`                   | Ambil semua dokumen pengguna    |
+| POST   | `/api/documents/upload`            | Upload dokumen PDF              |
+| GET    | `/api/documents/:id`               | Ambil detail dokumen            |
+| DELETE | `/api/documents/:id`               | Hapus dokumen                   |
+| POST   | `/api/ai/generate-flashcards`      | Generate flashcard dari dokumen |
+| POST   | `/api/ai/generate-quiz`            | Generate kuis dari dokumen      |
+| POST   | `/api/ai/generate-summary`         | Generate ringkasan dokumen      |
+| POST   | `/api/ai/chat`                     | Tanya-jawab berbasis dokumen    |
+| POST   | `/api/ai/explain-concept`          | Penjelasan konsep dari dokumen  |
+| GET    | `/api/ai/chat-history/:documentId` | Ambil riwayat chat              |
+| GET    | `/api/flashcards`                  | Ambil semua set flashcard       |
+| GET    | `/api/flashcards/:documentId`      | Ambil flashcard per dokumen     |
+| POST   | `/api/flashcards/:cardId/review`   | Tandai flashcard sudah direview |
+| PUT    | `/api/flashcards/:cardId/star`     | Toggle bintang pada flashcard   |
+| DELETE | `/api/flashcards/:id`              | Hapus set flashcard             |
+| GET    | `/api/quizzes/:documentId`         | Ambil kuis per dokumen          |
+| GET    | `/api/quizzes/quiz/:id`            | Ambil detail kuis               |
+| POST   | `/api/quizzes/:id/submit`          | Submit jawaban kuis             |
+| GET    | `/api/quizzes/:id/results`         | Ambil hasil kuis                |
+| DELETE | `/api/quizzes/:id`                 | Hapus kuis                      |
+| GET    | `/api/progress/dashboard`          | Ambil statistik progres belajar |
+
+Sekian dan terimakasih 5 juni 2026
